@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'Classes/user.dart';
 import 'Classes/game.dart';
+import 'Classes/player.dart';
+import 'gameDashboard.dart';
 
 class joinGame extends StatefulWidget {
   joinGame({Key key, this.currUser}) : super(key: key);
@@ -48,8 +50,18 @@ class _joinGameState extends State<joinGame> {
 
 
   void _join() {
-    print(gameIdController.text);
     print(codeController.text);
+    //TODO pass the code and current user's user id (widget.currUser.userId) to the database and get the game and player back.
+    //pass that game and player to the gameDashboard as currGame and currPlayer
+    game currGame = game();
+    player currPlayer = player();
+    currPlayer.playerId = widget.currUser.userId;
+    currGame.code = codeController.text;
+    final route = MaterialPageRoute(
+      builder: (context) =>
+          gameDashboard(currGame: currGame, currUser: widget.currUser, currPlayer: currPlayer),
+    );
+    Navigator.push(context, route);
   }
 
   @override

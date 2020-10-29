@@ -36,6 +36,8 @@ class _loginState extends State<login> {
   void _login() {
     print(nameController.text);
     print(passwordController.text);
+    //TODO: send the information to the backend, and create a new user object from the response.
+    //^ put it in the currentUser variable and pass it to the userDashboard page
     user currentUser = new user();
     currentUser.userId = nameController.text;
     currentUser.password = passwordController.text;

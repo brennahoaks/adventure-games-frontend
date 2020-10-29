@@ -15,7 +15,7 @@ class userDashboard extends StatefulWidget {
 }
 
 class _userDashboardState extends State<userDashboard> {
-  List<game> gameList;
+  List<player> playerList;
   @override
   void initState(){
     super.initState();
@@ -23,16 +23,19 @@ class _userDashboardState extends State<userDashboard> {
   }
 
   void init() async {
-    game testGame = game();
-    testGame.gameId = 1234;
-    gameList = List();
-    gameList.add(testGame);
+    player testPlayer = player();
+    testPlayer.gameId = 1234;
+    playerList = List();
+    playerList.add(testPlayer);
   }
 
-  void _gameDashboard(game currGame){
+  void _gameDashboard(player currPlayer){
+    //TODO pass a gameId to the database, get a game object back and pass that object to the game dashboard
+    game currGame = game();
+    currGame.gameId = currPlayer.gameId;
     final route = MaterialPageRoute(
       builder: (context) =>
-          gameDashboard(currGame: currGame, currUser: widget.currentUser),
+          gameDashboard(currGame: currGame, currUser: widget.currentUser, currPlayer: currPlayer),
     );
     Navigator.push(context, route);
   }
@@ -96,12 +99,12 @@ class _userDashboardState extends State<userDashboard> {
                 Expanded (
                   child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: gameList.length,
+                    itemCount: playerList.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(gameList[index].gameId.toString()),
+                        title: Text(playerList[index].gameId.toString()),
                         onTap: () {
-                          _gameDashboard(gameList[index]);
+                          _gameDashboard(playerList[index]);
                         },
                       );
                     },

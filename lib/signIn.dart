@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'Classes/user.dart';
+import 'userDashboard.dart';
 
 class signIn extends StatefulWidget {
   @override
@@ -32,6 +34,17 @@ class _signInState extends State<signIn> {
     print(lastNameController.text);
     print(userNameController.text);
     print(passwordController.text);
+
+    //TODO: send the information to the backend, and create a new user object from the response.
+    //^ put it in the currentUser variable and pass it to the userDashboard page
+    user currentUser = new user();
+    currentUser.userId = userNameController.text;
+    currentUser.password = passwordController.text;
+    final route = MaterialPageRoute(
+      builder: (context) =>
+          userDashboard(currentUser: currentUser),
+    );
+    Navigator.push(context, route);
   }
 
   void checkButtonEnabled() {

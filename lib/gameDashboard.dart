@@ -5,14 +5,16 @@ import 'Classes/game.dart';
 import 'Classes/player.dart';
 
 class gameDashboard extends StatefulWidget {
-  gameDashboard({Key key, this.currGame, this.currUser}) : super(key: key);
+  gameDashboard({Key key, this.currGame, this.currUser, this.currPlayer}) : super(key: key);
   final game currGame;
   final user currUser;
+  final player currPlayer;
   @override
   _gameDashboardState createState() => _gameDashboardState();
 }
 
 class _gameDashboardState extends State<gameDashboard> {
+  String targetId;
   @override
   void initState(){
     super.initState();
@@ -20,10 +22,15 @@ class _gameDashboardState extends State<gameDashboard> {
   }
 
   void init() async {
+    targetId = widget.currPlayer.targetId;
   }
 
   void _killTarget() {
-
+    String newTargetId = "new target";
+    //TODO pass the current player id (widget.currPlayer.playerId) to the database and get a new target playerId back.
+    setState(() =>{
+      targetId = newTargetId
+    });
   }
 
 

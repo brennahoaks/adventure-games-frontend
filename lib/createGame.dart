@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'Classes/user.dart';
 import 'Classes/game.dart';
+import 'Classes/player.dart';
+import 'gameDashboard.dart';
 
 class createGame extends StatefulWidget {
   createGame({Key key, this.currUser}) : super(key: key);
@@ -11,7 +13,6 @@ class createGame extends StatefulWidget {
 }
 
 class _createGameState extends State<createGame> {
-  TextEditingController startTimeController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   bool buttonEnabled;
 
@@ -31,11 +32,10 @@ class _createGameState extends State<createGame> {
 
 
   void checkButtonEnabled() {
-    String text1,text2,text3, text4, text5, text6 ;
+    String text1;
 
-    text1 = startTimeController.text ;
-    text2 = locationController.text ;
-    if(text1 == '' || text2 == '')
+    text1 = locationController.text ;
+    if(text1 == '')
     {
       print('Text Field is empty, Please Fill All Data');
     }else{
@@ -48,8 +48,18 @@ class _createGameState extends State<createGame> {
 
 
   void _create() {
-    print(startTimeController.text);
     print(locationController.text);
+    //TODO pass the location and current user's user id (widget.currUser.userId) to the database and get a game and player back.
+    //pass that game and player to the gameDashboard as currGame and currPlayer
+    game currGame = game();
+    player currPlayer = player();
+    currPlayer.playerId = widget.currUser.userId;
+    currGame.location = locationController.text;
+    final route = MaterialPageRoute(
+      builder: (context) =>
+          gameDashboard(currGame: currGame, currUser: widget.currUser, currPlayer: currPlayer),
+    );
+    Navigator.push(context, route);
   }
 
   @override
@@ -82,19 +92,6 @@ class _createGameState extends State<createGame> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Location',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: startTimeController,
-                    onChanged: (val) {
-                      checkButtonEnabled();
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Start Time',
                     ),
                   ),
                 ),

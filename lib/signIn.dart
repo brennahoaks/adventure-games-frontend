@@ -10,8 +10,6 @@ class _signInState extends State<signIn> {
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController birthdayController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool buttonEnabled;
 
@@ -33,8 +31,6 @@ class _signInState extends State<signIn> {
     print(firstNameController.text);
     print(lastNameController.text);
     print(userNameController.text);
-    print(emailController.text);
-    print(birthdayController.text);
     print(passwordController.text);
   }
 
@@ -44,10 +40,8 @@ class _signInState extends State<signIn> {
     text1 = firstNameController.text ;
     text2 = lastNameController.text ;
     text3 = userNameController.text ;
-    text4 = emailController.text ;
-    text5 = birthdayController.text ;
-    text6 = passwordController.text ;
-    if(text1 == '' || text2 == '' || text3 == '' || text4 == '' || text5 == '' || text6 == '')
+    text4 = passwordController.text ;
+    if(text1 == '' || text2 == '' || text3 == '' || text4 == '')
     {
       print('Text Field is empty, Please Fill All Data');
     }else{
@@ -130,32 +124,6 @@ class _signInState extends State<signIn> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'User Name',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: emailController,
-                    onChanged: (val) {
-                      checkButtonEnabled();
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Email',
-                    ),
-                  ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: birthdayController,
-                    onChanged: (val) {
-                      checkButtonEnabled();
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Birthday',
                     ),
                   ),
                 ),
